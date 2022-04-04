@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgb(238, 236, 215);
+    }
+    #head{
+        text-align: center;
+        color: rgb(231, 134, 44);
+    }
+    #container{
+        margin-top: 10px;
+        display: grid;
+        gap: 40px;
+        grid-template-columns: repeat(4,1fr);
+    
+
+    }
+    /* form>select::before{
+        content: Month;
+    } */
+    form{
+
+        border: 1px red;
+    }
+    /* label */
+    form {
+        /* display: block; */
+        /* margin: auto; */
+        /* margin-top: 5px; */
+        /* align-items: center; */
+        margin-left: 30%;
+        margin-right: 20%;
+    }
+    #container{
+        /* padding: 10px; */
+        margin: 20px 70px ;
+    }
+    #container>div{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        text-align: center;
+        background-color: rgb(194, 244, 217);
+    }
+    #container>div>h3{
+       color: blue;
+    }
+    #container>div>p{
+      color: green;
+    }
+    #container>div>p+p{
+        color: red;    }
+        label{
+            color: rgb(239, 56, 0);
+        }
+   
+</style>
+<body>
+    <h1 id="head">Expense Tracker</h1>
+    <form action="">
+        <!-- <input id="month" type="text" placeholder="Month"> -->
+       <label for="Month:">Month:</label>
+        <select name="Month" id="month" >
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+        <input id="income" type="number" placeholder="Income">
+        <input id="expense" type="number" placeholder="Expense">
+        <input id="submit" type="submit">
+    </form>
+
+    <div id="container"></div>
+</body>
+
+<script>
+    document.querySelector("form").addEventListener("submit", showDetail);
+   
+    // localStorage.getItem(i)==null
+    var i=1;
+    var total=localStorage.getItem("count")
+    while(i<=total)
+    {
+        var box= document.createElement("div");
+    var month=document.createElement("h3");
+    var income=document.createElement("p");
+    var expense=document.createElement("p");
+    var saving=document.createElement("p");
+    var info=JSON.parse(localStorage.getItem(i));
+        month.innerText=info[0]
+        console.log(month.innerText)
+        income.innerText=info[1]
+        expense.innerText=info[2]
+        saving.innerText=info[3]
+        box.append(month,income,expense,saving);
+        document.querySelector("#container").append(box);
+        i++;
+    }
+        
+    // console.log(info[2]);
+    
+   
+    
+    function showDetail()
+    {
+        var count;
+        if(localStorage.getItem("count")==null)
+        {
+            count=0;
+        }
+        else{
+            count=+(localStorage.getItem("count"));
+        }
+        event.preventDefault();
+        
+        var box= document.createElement("div");
+        var month=document.createElement("h3");
+        var income=document.createElement("p");
+        var expense=document.createElement("p");
+        var saving=document.createElement("p");
+
+        month.innerText=document.querySelector("#month").value;
+       
+        
+        income.innerText="Your Income is :"+document.querySelector("#income").value;
+       
+        
+        expense.innerText="Your Expense is :"+document.querySelector("#expense").value;
+
+        var moneySave=document.querySelector("#income").value-document.querySelector("#expense").value
+        
+        saving.innerText="Your Saving is :"+moneySave;
+        
+        
+        count++;
+        var detail=[ month.innerText, income.innerText, expense.innerText, saving.innerText]
+       localStorage.setItem("count",+count)
+        localStorage.setItem(count,JSON.stringify(detail))
+        
+        box.append(month,income,expense,saving);
+        // localStorage.setItem("info",JSON.simplify(div))
+        document.querySelector("#container").append(box)
+
+    }
+</script>
+</html>
