@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Expense Tracker</title>
 </head>
 <style>
     body{
@@ -17,7 +17,7 @@
     #container{
         margin-top: 10px;
         display: grid;
-        gap: 40px;
+        gap: 80px;
         grid-template-columns: repeat(4,1fr);
     
 
@@ -95,12 +95,13 @@
     var total=localStorage.getItem("count")
     while(i<=total)
     {
-        var box= document.createElement("div");
+    var box= document.createElement("div");
     var month=document.createElement("h3");
     var income=document.createElement("p");
     var expense=document.createElement("p");
     var saving=document.createElement("p");
     var info=JSON.parse(localStorage.getItem(i));
+      
         month.innerText=info[0]
         console.log(month.innerText)
         income.innerText=info[1]
